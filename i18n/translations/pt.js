@@ -18,7 +18,9 @@ export default {
     "try_later": "Tente mais tarde, talvez tenhamos algo interessante para você",
     "offline_message": "Você não está conectado à internet",
     "choose_lang": "Selecione um idioma",
-    "introLang": "O RBeats é um aplicativo criado pela Reckitt Benckiser (RB), para que você conheça nossas marcas, nossa cultura de negócios e mantenha-o sempre informado sobre nossas mais recentes oportunidades de emprego."
+    "introLang": "O RBeats é um aplicativo criado pela Reckitt Benckiser (RB), para que você conheça nossas marcas, nossa cultura de negócios e mantenha-o sempre informado sobre nossas mais recentes oportunidades de emprego.",
+    "gallery_ask_permission": "Allow RBeats to access your photos",
+    "empty_gallery": "Não há imagens disponíveis na sua galeria."
   },
   "settings": {
     "dark_mode": "Modo escuro",

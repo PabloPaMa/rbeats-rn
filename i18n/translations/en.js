@@ -18,7 +18,9 @@ export default {
     "try_later": "Try it later, maybe we have something interesting for you",
     "offline_message": "You are not connected to the internet",
     "choose_lang": "Select a language",
-    "introLang": "RBeats is an app created by Reckitt Benckiser (RB), so you know our brands, our entrepreneurial culture, and keep you informed of our latest career opportunities."
+    "introLang": "RBeats is an app created by Reckitt Benckiser (RB), so you know our brands, our entrepreneurial culture, and keep you informed of our latest career opportunities.",
+    "gallery_ask_permission": "Allow RBeats to access your photos",
+    "empty_gallery": "There are no images available in your gallery."
   },
   "settings": {
     "dark_mode": "Dark mode",

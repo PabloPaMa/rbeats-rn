@@ -4,6 +4,7 @@ import AppIntroSlider from '../baseComponents/IntroSlider'
 import i18n from '../i18n'
 //import { DangerZone } from 'expo'
 //const { Lottie } = DangerZone
+import Lottie from 'lottie-react-native'
 import { connect } from 'react-redux'
 import { setShowIntro } from '../redux/actions/appState'
 import AnimatedHeart from '../baseComponents/AnimatedHeart'
@@ -68,25 +69,22 @@ const { width } = Dimensions.get('screen')
 class LottieAnimation extends React.Component {
 
   componentWillReceiveProps() {
-    /* this.animation.reset()
-    this.animation.play() */
+    this.animation.reset()
+    this.animation.play()
   }
 
   render() {
-    /* <Lottie
+    return <Lottie
       ref={animation => {
         this.animation = animation;
       }}
       style={{
         alignSelf: 'center',
-        height: Math.floor(width - 80),
-        width: Math.floor(width - 80),
-        margin: 40
+        height: width,
+        width: width,
       }}
       source={this.props.lottieAsset}
-    /> */
-    return <View>
-    </View>
+    />
   }
 }
 

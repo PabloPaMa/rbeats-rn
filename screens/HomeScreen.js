@@ -99,6 +99,8 @@ class HomeScreen extends React.Component {
     if (photos.edges.length) {
       console.log(photos.edges)
       this.setState({ photos: photos.edges, modalVisible: true })
+    } else {
+      Alert.alert(i18n.t('empty_gallery', appScope))
     }
   }
 

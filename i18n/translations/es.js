@@ -18,7 +18,9 @@ export default {
     "try_later": "Inténtalo más tarde, tal vez tengamos algo interesante para ti",
     "offline_message": "No estás conectado a internet",
     "choose_lang": "Selecciona un idioma",
-    "introLang": "RBeats es una aplicación desarrollada por Reckitt Benckiser (RB), para que conozcas nuestras marcas, nuestra cultura empresarial, y te mantengas siempre informado de nuestras últimas oportunidades de empleo."
+    "introLang": "RBeats es una aplicación desarrollada por Reckitt Benckiser (RB), para que conozcas nuestras marcas, nuestra cultura empresarial, y te mantengas siempre informado de nuestras últimas oportunidades de empleo.",
+    "gallery_ask_permission": "¿Permitir que RBeats acceda a tus fotos?",
+    "empty_gallery": "No hay imágenes disponibles en tu galería."
   },
   "settings": {
     "dark_mode": "Modo oscuro",
