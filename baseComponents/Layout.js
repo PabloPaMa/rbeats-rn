@@ -79,7 +79,7 @@ const layout = props => {
 
   return <View style={styles.container}>
     <SafeAreaView style={[styles.header, { backgroundColor: props.app.theme === 'light' ? '#f2f2f2' : '#222', }]}>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 20, }}>
         {
           props.backButton
             ? <TouchableOpacity onPress={() => props.navigation.goBack()} >

@@ -42,6 +42,8 @@
 		47194A7AE22848318F0A32D6 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E84ADC8AB5514F8FB2F1A4C8 /* OpenSans-Regular.ttf */; };
 		73E3998E22F3549600AA54C1 /* rbeats_cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = 73E3998D22F3549600AA54C1 /* rbeats_cert.cer */; };
 		73E3999522F35C3400AA54C1 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E3999422F35BEE00AA54C1 /* libRCTCameraRoll.a */; };
+		73FDA2DD22F3BA9800E64E5B /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73BEE7AB22F39B1D00588F20 /* Lottie.framework */; };
+		73FDA2DE22F3BA9800E64E5B /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73BEE7AB22F39B1D00588F20 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75730E6A9AC043839B75162D /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3327B48DB1CE4716AAC053A5 /* OpenSans-BoldItalic.ttf */; };
 		7A2484689F7249A8B3DBA670 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 444E7E92734E4665B50D4C0A /* OpenSans-ExtraBold.ttf */; };
 		7C622634EA124171A9CC30E8 /* libLottieReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81E089DD23FB4CCEA1F2E93F /* libLottieReactNative.a */; };
@@ -438,6 +440,13 @@
 			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
 			remoteInfo = RCTCameraRoll;
 		};
+		73FDA2DF22F3BA9800E64E5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F066E454DCE4427C85D99543 /* Lottie.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 62CA59B71E3C173B002D7188;
+			remoteInfo = Lottie_iOS;
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -460,6 +469,20 @@
 			remoteInfo = RCTBlob;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		73FDA31222F3BA9800E64E5B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				73FDA2DE22F3BA9800E64E5B /* Lottie.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -542,6 +565,7 @@
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
+				73FDA2DD22F3BA9800E64E5B /* Lottie.framework in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
@@ -955,10 +979,12 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				73FDA31222F3BA9800E64E5B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				73FDA2E022F3BA9800E64E5B /* PBXTargetDependency */,
 			);
 			name = rbeats;
 			productName = "Hello World";
@@ -1017,6 +1043,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = N2NAQ97H3E;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1643,6 +1670,11 @@
 			target = 2D02E47A1E0B4A5D006451C7 /* rbeats-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
+		73FDA2E022F3BA9800E64E5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Lottie_iOS;
+			targetProxy = 73FDA2DF22F3BA9800E64E5B /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1753,6 +1785,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = N2NAQ97H3E;
@@ -1778,6 +1812,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alucinastudio.rbeats;
 				PRODUCT_NAME = rbeats;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1786,6 +1821,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2NAQ97H3E;
 				HEADER_SEARCH_PATHS = (
@@ -1810,6 +1847,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alucinastudio.rbeats;
 				PRODUCT_NAME = rbeats;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

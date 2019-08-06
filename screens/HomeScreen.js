@@ -35,6 +35,7 @@ import SOSLogo from '../assets/images/icons/icon_sos.png'
 import speakupLogo from '../assets/images/icons/icon_speakup.png'
 import settingsLogo from '../assets/images/icons/Settings.png'
 import logoutLogo from '../assets/images/icons/logout.png'
+import backBtn from '../assets/images/icons/back_btn.png'
 
 import profileMask from '../assets/images/profile/profile_mask.png'
 import profileMaskFlare from '../assets/images/profile/profile_mask_flare.png'
@@ -314,11 +315,14 @@ class HomeScreen extends React.Component {
           visible={this.state.modalVisible}
           onRequestClose={() => { this.setState({ modalVisible: false }) }}>
           <View style={{ marginTop: 22 }}>
+            <SafeAreaView style={[styles.header, { backgroundColor: this.props.app.theme === 'light' ? '#f2f2f2' : '#222', }]}>
+              <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => { this.setState({ modalVisible: false }) }} >
+                <Image source={backBtn} style={{ height: 30, width: 30 }} />
+                <Text
+                  style={styles.headerText}>{i18n.t('go_back', appScope)}</Text>
+              </TouchableOpacity>
+            </SafeAreaView>
             <View>
-              <TouchableHighlight
-                onPress={() => { this.setState({ modalVisible: false }) }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
               <FlatList
                 numColumns={3}
                 data={this.state.photos}
@@ -343,6 +347,19 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(HomeScreen)
 
 const styles = StyleSheet.create({
+  header: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    height: Platform.OS === 'ios' ? 60 : 50,
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    maxWidth: '100%'
+  },
+  headerText: {
+    color: '#9f9fa3',
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 20,
+  },
   settings: {
     alignItems: 'center',
     justifyContent: 'center',

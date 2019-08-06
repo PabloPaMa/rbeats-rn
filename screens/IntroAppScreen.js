@@ -80,8 +80,9 @@ class LottieAnimation extends React.Component {
       }}
       style={{
         alignSelf: 'center',
-        height: width,
-        width: width,
+        height: width - 60,
+        width: width - 60,
+        marginBottom: 20,
       }}
       source={this.props.lottieAsset}
     />
@@ -136,7 +137,7 @@ class AppIntro extends React.Component {
               <LottieAnimation changes={this.state.changes} lottieAsset={props.animation} />
             </View>
         }
-        <Text style={{ color: '#abaaaf', fontFamily: 'OpenSans-Regular', fontSize: 20, textAlign: 'center' }}>{props.text}</Text>
+        <Text style={{ color: '#abaaaf', fontFamily: 'OpenSans-Regular', fontSize: 20, textAlign: 'center', }}>{props.text}</Text>
       </View>
     </ImageBackground >
 
