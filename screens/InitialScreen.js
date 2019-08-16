@@ -1,6 +1,7 @@
 import React from 'react'
-import { AsyncStorage, ImageBackground, Platform, StyleSheet, Text, } from 'react-native'
+import { ImageBackground, Platform, StyleSheet, Text, } from 'react-native'
 import AnimatedHeart from '../baseComponents/AnimatedHeart'
+import SecureStorage, { ACCESS_CONTROL, ACCESSIBLE, AUTHENTICATION_TYPE } from 'react-native-secure-storage'
 /* import RNIsDeviceRooted from 'react-native-is-device-rooted'
 */
 import JailMonkey from 'jail-monkey'
@@ -16,7 +17,12 @@ import i18n from '../i18n'
 import backgroundWhite from '../assets/images/main/bg_white.jpg'
 import backgroundDark from '../assets/images/main/bg_dark.jpg'
 
+
 const appScope = { scope: "app" }
+const config = {
+  accessible: ACCESSIBLE.ALWAYS,
+  service: 'rbeats',
+}
 
 /**
  * Initial screen component
@@ -33,12 +39,15 @@ class InitialScreen extends React.Component {
   }
 
   loadAppData = async () => {
-    let user = await AsyncStorage.getItem('app_user')
-
-    if (user !== null) {
-      let appSettings = await AsyncStorage.getItem('app_settings')
-        , appUser = await AsyncStorage.getItem('app_user')
+    let user = await SecureStorage.getItem('app_user', config)
+      , appSettings = await SecureStorage.getItem('app_settings', config)
+      , appUser = await SecureStorage.getItem('app_user', config)
+    console.log(user)
+    if (user !== null && user !== undefined) {
+      console.log(appUser)
+      console.log(appSettings)
       if (appSettings) {
+        console.log('appSettings', appSettings)
         appSettings = JSON.parse(appSettings)
         this.setState({ mode: appSettings.theme })
         this.props.dispatch(setTheme(appSettings.theme))
@@ -53,6 +62,7 @@ class InitialScreen extends React.Component {
             this.props.navigation.navigate('AppStack')
         }, 500)
       } else {
+        console.log('!appSettings')
         setTimeout(() => {
           this.props.dispatch(setLang(getLanguage()))
           this.props.dispatch(setUser(JSON.parse(appUser)))
@@ -64,6 +74,7 @@ class InitialScreen extends React.Component {
         }, 2000)
       }
     } else {
+      console.log('else')
       setTimeout(() => {
         this.props.dispatch(setLang(getLanguage()))
         i18n.locale = getLanguage()
@@ -79,29 +90,13 @@ class InitialScreen extends React.Component {
    * @memberof InitialScreen
    */
   async componentDidMount() {
-    this.loadAppData()
-    if (Platform.OS === 'android') {
-      /* try {
-        const isDeviceRooted = await RNIsDeviceRooted.isDeviceRooted()
-        if (!isDeviceRooted) {
-          this.loadAppData()
-        } else {
-          i18n.locale = getLanguage()
-          this.setState({ isDeviceRooted })
-        }
-
-      } catch (e) {
-        this.loadAppData()
-        console.error('device Root error', e)
-      } */
-    } else {
-      if (!JailMonkey.isJailBroken()) {
-        this.loadAppData()
-      } else {
-        i18n.locale = getLanguage()
-        this.setState({ isDeviceRooted })
-      }
+    if (!JailMonkey.isJailBroken()) {
+      console.log('D:', !JailMonkey.isJailBroken())
       this.loadAppData()
+    } else {
+      console.log(':D', JailMonkey.isJailBroken())
+      i18n.locale = getLanguage()
+      this.setState({ isDeviceRooted: true })
     }
   }
 

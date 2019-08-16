@@ -3,6 +3,7 @@ package com.rbeats;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import li.yunqi.rnsecurestorage.RNSecureStoragePackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.gantix.JailMonkey.JailMonkeyPackage;
 import com.toyberman.RNSslPinningPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSecureStoragePackage(),
             new LottiePackage(),
             new JailMonkeyPackage(),
             new RNSslPinningPackage(),

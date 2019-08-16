@@ -1,7 +1,7 @@
 export default {
   "app": {
     "root_message_android": "No es posible ejecutar esta aplicación en dispositivos con usuarios Root.",
-    "root_message_ios": "",
+    "root_message_ios": "No es posible ejecutar esta aplicación en dispositivos con jailbreak.",
     "authenticating": "Autenticando...",
     "laoding": "Cargando...",
     "loading_resources": "Revisa tu correo y da click en el link para confirmar tu acceso",

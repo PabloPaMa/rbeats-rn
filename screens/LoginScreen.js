@@ -1,9 +1,10 @@
 import React from 'react'
-import { Alert, Clipboard, AsyncStorage, Dimensions, Image, ImageBackground, Linking, SafeAreaView, StyleSheet, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Clipboard, Dimensions, Image, ImageBackground, Linking, SafeAreaView, StyleSheet, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import i18n, { getLanguageByCountryCode } from '../i18n'
 import LoadingHeart from '../baseComponents/LoadingHeart'
 import { fetch } from 'react-native-ssl-pinning'
+import SecureStorage, { ACCESS_CONTROL, ACCESSIBLE, AUTHENTICATION_TYPE } from 'react-native-secure-storage'
 
 import { setUser } from '../redux/actions/user'
 
@@ -18,6 +19,13 @@ const loginScope = { scope: "login" }
 const inputsScope = { scope: "inputs" }
 const appScope = { scope: "app" }
 
+const config = {
+  accessControl: ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
+  accessible: ACCESSIBLE.WHEN_UNLOCKED,
+  authenticationPrompt: 'auth with yourself',
+  service: 'rbeats',
+  authenticateType: AUTHENTICATION_TYPE.BIOMETRICS,
+}
 
 /**
  * Login screen component
@@ -67,14 +75,6 @@ class LoginScreen extends React.Component {
     let data = new FormData()
     data.append('email', email)
 
-    console.log('fetch', await fetch('https://rbeats.alucinastudio.com/access', {
-      method: 'POST',
-      body: {
-        formData: data
-      },
-
-    }))
-
     fetch('https://rbeats.alucinastudio.com/access', {
       method: 'POST',
       body: {
@@ -91,12 +91,12 @@ class LoginScreen extends React.Component {
           this.setState({ isTesting: true, message: 'loading_testing' }, () => {
             setTimeout(async () => {
               this.props.dispatch(setUser({ email: 'testing@rbeats.com', username: 'Testing', countryCode: 'MX' }))
-              await AsyncStorage.setItem('app_user', JSON.stringify({ email: 'testing@rbeats.com', username: 'Testing', countryCode: 'MX' }))
+              await SecureStorage.setItem('app_user', JSON.stringify({ email: 'testing@rbeats.com', username: 'Testing', countryCode: 'MX' }), config)
               this.props.navigation.navigate('AppStack')
             }, 2000)
           })
         } else {
-          await AsyncStorage.setItem('app_tempData', JSON.stringify({ email, code: res.message }))
+          await SecureStorage.setItem('app_tempData', JSON.stringify({ email, code: res.message }), config)
           this.setState({ isCodeSent: true, message: 'code_sent', validData: { email, code: res.message }, })
         }
       })
@@ -135,9 +135,9 @@ class LoginScreen extends React.Component {
           .then(res => res.json())
           .then(async (res) => {
             if (res.name) {
-              await AsyncStorage.removeItem('app_tempData')
-              await AsyncStorage.setItem('app_user', JSON.stringify({ email: res.email, username: res.name, countryCode: res.countryCode }))
-              await AsyncStorage.setItem('app_settings', JSON.stringify({ ...this.props.app, lang: getLanguageByCountryCode(res.countryCode) }))
+              await SecureStorage.removeItem('app_tempData', config)
+              await SecureStorage.setItem('app_user', JSON.stringify({ email: res.email, username: res.name, countryCode: res.countryCode }), config)
+              await SecureStorage.setItem('app_settings', JSON.stringify({ ...this.props.app, lang: getLanguageByCountryCode(res.countryCode) }), config)
               i18n.locale = getLanguageByCountryCode(res.countryCode)
               this.props.dispatch(setUser({ email: res.email, username: res.name, countryCode: res.countryCode }))
               if (this.props.app.showIntro)
@@ -163,7 +163,7 @@ class LoginScreen extends React.Component {
   }
 
   async componentDidMount() {
-    let code = await AsyncStorage.getItem('@app:tempData')
+    let code = await SecureStorage.getItem('@app:tempData', config)
     if (code) {
       this.setState({ validData: JSON.parse(code), isCodeSent: true, message: 'code_sent', })
     }

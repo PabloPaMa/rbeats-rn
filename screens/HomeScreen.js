@@ -2,7 +2,6 @@ import React from 'react'
 import {
   Animated,
   Alert,
-  AsyncStorage,
   FlatList,
   Dimensions,
   Easing,
@@ -23,6 +22,7 @@ import {
 // import { ImagePicker, Permissions } from 'expo'
 import { connect } from 'react-redux'
 import i18n from '../i18n'
+import SecureStorage, { ACCESS_CONTROL, ACCESSIBLE, AUTHENTICATION_TYPE } from 'react-native-secure-storage'
 
 
 import backgroundWhite from '../assets/images/main/bg_white.jpg'
@@ -48,6 +48,13 @@ const { height, width } = Dimensions.get('window')
 const sectionScope = { scope: "sections" }
 const appScope = { scope: "app" }
 
+const config = {
+  accessControl: ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
+  accessible: ACCESSIBLE.WHEN_UNLOCKED,
+  authenticationPrompt: 'auth with yourself',
+  service: 'rbeats',
+  authenticateType: AUTHENTICATION_TYPE.BIOMETRICS,
+}
 
 /**
  * Home screen component
@@ -106,7 +113,7 @@ class HomeScreen extends React.Component {
   }
 
   setProfilePic = async (photo) => {
-    await AsyncStorage.setItem('app_user', JSON.stringify({ ...this.props.user, profilePic: photo }))
+    await SecureStorage.setItem('app_user', JSON.stringify({ ...this.props.user, profilePic: photo }), config)
     this.setState({ profilePic: photo, modalVisible: false, photos: [] })
   }
 
@@ -133,8 +140,8 @@ class HomeScreen extends React.Component {
    * @memberof HomeScreen
    */
   _onLogout = async () => {
-    await AsyncStorage.removeItem('app_user')
-    await AsyncStorage.removeItem('app_settings')
+    await SecureStorage.removeItem('app_user', config)
+    await SecureStorage.removeItem('app_settings', config)
     this.props.dispatch(resetAppState())
     this.props.dispatch(resetUserState())
     this.props.navigation.navigate('Initial')
@@ -192,7 +199,7 @@ class HomeScreen extends React.Component {
     ]).start()
 
     try {
-      const user = await AsyncStorage.getItem('app_user')
+      const user = await SecureStorage.getItem('app_user', config)
       if (user !== null) {
         let userInfo = JSON.parse(user)
         this.setState({ profilePic: userInfo.profilePic })

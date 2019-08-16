@@ -1,7 +1,7 @@
 export default {
   "app": {
     "root_message_android": "Não é possível executar este aplicativo neste sistema operacional. (dispositivo com super usuário)",
-    "root_message_ios": "",
+    "root_message_ios": "Não é possível executar este aplicativo neste sistema operacional.",
     "authenticating": "Autenticando...",
     "laoding": "Carregando...",
     "loading_resources": "Verifique seu e-mail e copie o código para confirmar seu acesso",

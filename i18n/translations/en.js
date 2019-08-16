@@ -1,7 +1,7 @@
 export default {
   "app": {
     "root_message_android": "This app is not available for rooted devices",
-    "root_message_ios": "",
+    "root_message_ios": "This app is not available for jailbroken devices",
     "authenticating": "Authenticating...",
     "laoding": "Loading...",
     "loading_resources": "Check your email and copy the code to confirm your access",

@@ -1,6 +1,7 @@
 import React from 'react'
-import { AsyncStorage, Dimensions, StyleSheet, View, Text, Image, ImageBackground } from 'react-native'
+import { Dimensions, StyleSheet, View, Text, Image, ImageBackground } from 'react-native'
 import AppIntroSlider from '../baseComponents/IntroSlider'
+import SecureStorage, { ACCESS_CONTROL, ACCESSIBLE, AUTHENTICATION_TYPE } from 'react-native-secure-storage'
 import i18n from '../i18n'
 //import { DangerZone } from 'expo'
 //const { Lottie } = DangerZone
@@ -20,6 +21,14 @@ import backgroundWhite from '../assets/images/main/bg_white.jpg'
 import backgroundDark from '../assets/images/main/bg_dark.jpg'
 
 const introScope = { scope: "intro" }
+
+const config = {
+  accessControl: ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
+  accessible: ACCESSIBLE.WHEN_UNLOCKED,
+  authenticationPrompt: 'auth with yourself',
+  service: 'rbeats',
+  authenticateType: AUTHENTICATION_TYPE.BIOMETRICS,
+}
 
 const slides = [
   {
@@ -108,10 +117,10 @@ class AppIntro extends React.Component {
    */
   onSkip = async () => {
     this.props.dispatch(setShowIntro(false))
-    await AsyncStorage.setItem('app_settings', JSON.stringify({
+    await SecureStorage.setItem('app_settings', JSON.stringify({
       ...this.props.app,
       showIntro: false
-    }))
+    }), config)
     this.props.navigation.navigate('AppStack')
   }
 
