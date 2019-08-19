@@ -8,7 +8,7 @@ import ErrorMessage from '../../baseComponents/ErrorMessage'
 import FadeInView from '../../baseComponents/FadeInView'
 import Grid from './components/Grid'
 import EmptyResult from '../../baseComponents/EmptyResult'
-import SecureStorage, { ACCESS_CONTROL, ACCESSIBLE, AUTHENTICATION_TYPE } from 'react-native-secure-storage'
+import Storage from '../../services/persistence'
 
 import searchIcon from '../../assets/images/icons/search_icon.png'
 
@@ -21,13 +21,6 @@ const sectionScope = { scope: "sections" }
 const inputsScope = { scope: "inputs" }
 const appScope = { scope: "app" }
 
-const config = {
-  accessControl: ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
-  accessible: ACCESSIBLE.WHEN_UNLOCKED,
-  authenticationPrompt: 'auth with yourself',
-  service: 'rbeats',
-  authenticateType: AUTHENTICATION_TYPE.BIOMETRICS,
-}
 
 /**
  * Media grid screen componet
@@ -117,10 +110,10 @@ class MediaGridScreen extends React.Component {
     if (this.state.searchText === 'rb dark mode') {
       let { theme } = this.props.app
       this.props.dispatch(setTheme(theme === 'light' ? 'dark' : 'light'))
-      await SecureStorage.setItem('@app:settings', JSON.stringify({
+      await Storage.setItem('@app:settings', JSON.stringify({
         ...this.props.app,
         theme: theme === 'light' ? 'dark' : 'light'
-      }), config)
+      }))
       this.setState({ searchText: '' })
     } else {
       this.setState({ shouldSearch: true, firstLoad: false })

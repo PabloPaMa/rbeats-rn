@@ -1,7 +1,6 @@
 import React from 'react'
 import { ImageBackground, Platform, StyleSheet, Text, } from 'react-native'
 import AnimatedHeart from '../baseComponents/AnimatedHeart'
-import SecureStorage, { ACCESS_CONTROL, ACCESSIBLE, AUTHENTICATION_TYPE } from 'react-native-secure-storage'
 /* import RNIsDeviceRooted from 'react-native-is-device-rooted'
 */
 import JailMonkey from 'jail-monkey'
@@ -9,6 +8,8 @@ import JailMonkey from 'jail-monkey'
 import { connect } from 'react-redux'
 import { setTheme, setLang, setShowIntro } from '../redux/actions/appState'
 import { setUser } from '../redux/actions/user'
+
+import Storage from '../services/persistence'
 
 import store from '../redux/store'
 import { getLanguage } from '../i18n'
@@ -19,10 +20,6 @@ import backgroundDark from '../assets/images/main/bg_dark.jpg'
 
 
 const appScope = { scope: "app" }
-const config = {
-  accessible: ACCESSIBLE.ALWAYS,
-  service: 'rbeats',
-}
 
 /**
  * Initial screen component
@@ -39,9 +36,9 @@ class InitialScreen extends React.Component {
   }
 
   loadAppData = async () => {
-    let user = await SecureStorage.getItem('app_user', config)
-      , appSettings = await SecureStorage.getItem('app_settings', config)
-      , appUser = await SecureStorage.getItem('app_user', config)
+    let user = await Storage.getItem('app_user')
+      , appSettings = await Storage.getItem('app_settings')
+      , appUser = await Storage.getItem('app_user')
     console.log(user)
     if (user !== null && user !== undefined) {
       console.log(appUser)

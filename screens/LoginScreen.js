@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import i18n, { getLanguageByCountryCode } from '../i18n'
 import LoadingHeart from '../baseComponents/LoadingHeart'
 import { fetch } from 'react-native-ssl-pinning'
-import SecureStorage, { ACCESS_CONTROL, ACCESSIBLE, AUTHENTICATION_TYPE } from 'react-native-secure-storage'
+import Storage from '../services/persistence'
 
 import { setUser } from '../redux/actions/user'
 
@@ -19,13 +19,6 @@ const loginScope = { scope: "login" }
 const inputsScope = { scope: "inputs" }
 const appScope = { scope: "app" }
 
-const config = {
-  accessControl: ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
-  accessible: ACCESSIBLE.WHEN_UNLOCKED,
-  authenticationPrompt: 'auth with yourself',
-  service: 'rbeats',
-  authenticateType: AUTHENTICATION_TYPE.BIOMETRICS,
-}
 
 /**
  * Login screen component
@@ -91,12 +84,12 @@ class LoginScreen extends React.Component {
           this.setState({ isTesting: true, message: 'loading_testing' }, () => {
             setTimeout(async () => {
               this.props.dispatch(setUser({ email: 'testing@rbeats.com', username: 'Testing', countryCode: 'MX' }))
-              await SecureStorage.setItem('app_user', JSON.stringify({ email: 'testing@rbeats.com', username: 'Testing', countryCode: 'MX' }), config)
+              await Storage.setItem('app_user', JSON.stringify({ email: 'testing@rbeats.com', username: 'Testing', countryCode: 'MX' }))
               this.props.navigation.navigate('AppStack')
             }, 2000)
           })
         } else {
-          await SecureStorage.setItem('app_tempData', JSON.stringify({ email, code: res.message }), config)
+          await Storage.setItem('app_tempData', JSON.stringify({ email, code: res.message }))
           this.setState({ isCodeSent: true, message: 'code_sent', validData: { email, code: res.message }, })
         }
       })
@@ -135,9 +128,9 @@ class LoginScreen extends React.Component {
           .then(res => res.json())
           .then(async (res) => {
             if (res.name) {
-              await SecureStorage.removeItem('app_tempData', config)
-              await SecureStorage.setItem('app_user', JSON.stringify({ email: res.email, username: res.name, countryCode: res.countryCode }), config)
-              await SecureStorage.setItem('app_settings', JSON.stringify({ ...this.props.app, lang: getLanguageByCountryCode(res.countryCode) }), config)
+              await Storage.removeItem('app_tempData')
+              await Storage.setItem('app_user', JSON.stringify({ email: res.email, username: res.name, countryCode: res.countryCode }))
+              await Storage.setItem('app_settings', JSON.stringify({ ...this.props.app, lang: getLanguageByCountryCode(res.countryCode) }))
               i18n.locale = getLanguageByCountryCode(res.countryCode)
               this.props.dispatch(setUser({ email: res.email, username: res.name, countryCode: res.countryCode }))
               if (this.props.app.showIntro)
@@ -163,7 +156,7 @@ class LoginScreen extends React.Component {
   }
 
   async componentDidMount() {
-    let code = await SecureStorage.getItem('@app:tempData', config)
+    let code = await Storage.getItem('@app:tempData')
     if (code) {
       this.setState({ validData: JSON.parse(code), isCodeSent: true, message: 'code_sent', })
     }
