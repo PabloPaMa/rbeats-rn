@@ -23,7 +23,7 @@ const imageVisor = props => {
       <Image source={backBtn} style={{ flex: 1, height: 30, width: 30, }} resizeMode='contain' />
     </TouchableOpacity>
     <FadeInView>
-      <ImageViewer imageUrls={images} style={{ height, width }} />
+      <ImageViewer saveToLocalByLongPress={false} imageUrls={images} style={{ height, width }} />
     </FadeInView>
   </View>
 }
