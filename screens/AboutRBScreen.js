@@ -41,32 +41,32 @@ class AboutRBScreen extends React.Component {
 
     let urls = {
       'about': {
-        'es': 'https://www.rb.com/mx/acerca-de-nosotros/',
+        'es': 'https://www.rb.com/about-us/who-we-are/',
         'en': 'http://www.rb.com/us/about-us/',
         'pt': 'https://www.rb.com/br/sobre-nos/'
       },
       'brand': {
-        'es': 'https://www.rb.com/mx/marcas/',
+        'es': 'https://www.rb.com/brands/',
         'en': 'http://www.rb.com/us/brands/',
         'pt': 'https://www.rb.com/br/marcas/'
       },
       'inn': {
-        'es': 'https://www.rb.com/mx/innovacion/',
+        'es': 'https://www.rb.com/innovation/',
         'en': 'http://www.rb.com/us/innovation/',
         'pt': 'https://www.rb.com/br/inovacao/'
       },
       'resp': {
-        'es': 'https://www.rb.com/mx/responsabilidad/',
+        'es': 'https://www.rb.com/responsibility/',
         'en': 'http://www.rb.com/us/responsibility/',
         'pt': 'https://www.rb.com/br/responsabilidade/'
       },
       'contact': {
-        'es': 'https://www.rb.com/mx/acerca-de-nosotros/contacto/',
+        'es': 'https://www.rb.com/about-us/contact-us/',
         'en': 'http://www.rb.com/us/about-us/contact',
         'pt': 'https://www.rb.com/br/sobre-nos/contato/'
       },
       'join': {
-        'es': 'https://www.rb.com/mx/empleo/',
+        'es': 'https://www.rb.com/careers/',
         'en': 'http://www.rb.com/us/careers/',
         'pt': 'https://www.rb.com/br/carreiras/'
       }
