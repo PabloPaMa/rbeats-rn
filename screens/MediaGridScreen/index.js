@@ -107,10 +107,10 @@ class MediaGridScreen extends React.Component {
    * @memberof MediaGridScreen
    */
   onSubmitEditing = async () => {
-    if (this.state.searchText === 'rb dark mode') {
+    if (this.state.searchText === 'dark mode') {
       let { theme } = this.props.app
       this.props.dispatch(setTheme(theme === 'light' ? 'dark' : 'light'))
-      await Storage.setItem('@app:settings', JSON.stringify({
+      await Storage.setItem('app_settings', JSON.stringify({
         ...this.props.app,
         theme: theme === 'light' ? 'dark' : 'light'
       }))

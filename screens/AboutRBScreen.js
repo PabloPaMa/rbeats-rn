@@ -93,6 +93,7 @@ class AboutRBScreen extends React.Component {
       <ImageBackground source={this.props.app.theme === 'light' ? backgroundWhite : backgroundDark} style={styles.container} resizeMode='cover'>
         <View style={{ flex: 1, overflow: 'hidden' }}>
           <WebView
+            useWebKit={true}
             onLoad={() => { setTimeout(() => { this.setState({ loading: false }) }, 500) }}
             ref={ref => this.webview = ref}
             source={{ uri: siteUrl }}

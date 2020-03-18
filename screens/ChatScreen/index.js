@@ -17,7 +17,7 @@ const chatScreen = props => <Layout backButton sectionName={i18n.t('chat', secti
     <WebView
       renderLoading={() => <LoadingHeart />}
       thirdPartyCookiesEnabled
-      source={{ uri: 'https://imagetrain.botlers.io/rbeats/2?open=1&closable=0' }}
+      source={{ uri: 'https://botlers.io/rb' }}
       style={{ flex: 1 }}
     />
   </View>

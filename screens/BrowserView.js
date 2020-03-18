@@ -35,6 +35,7 @@ export default class BrowserScreen extends React.Component {
         {
           this.state.showVisor
             ? <WebView
+              useWebKit={true}
               renderLoading={() => <LoadingHeart />}
               source={{ uri: url }}
             />
