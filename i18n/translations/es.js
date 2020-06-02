@@ -62,6 +62,7 @@ export default {
     "no_rb_email": "Esta aplicación esta diseñada para personal de rb.",
     "passwords_does_not_match": "Las contraseñas proporcionadas no coinciden",
     "auth_flow_cancelled": "¡Vaya!, se ha cancelado el inicio de sesión, inténtalo de nuevo",
+    "invalid_user": "¡Vaya!, Este correo electrónico no está registrado en nuestra base de datos.",
     "about": "Conoce RBeats",
     "about_RB": "Acerca de RB",
 

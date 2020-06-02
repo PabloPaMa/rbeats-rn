@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Image, Linking, Platform, Text, ScrollView, TouchableOpacity, View, WebView } from 'react-native'
+import { Alert, Image, Linking, Platform, Text, ScrollView, TouchableOpacity, View } from 'react-native'
 import i18n from '../../i18n'
 
 import Layout from '../../baseComponents/Layout'

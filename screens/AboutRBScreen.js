@@ -1,11 +1,11 @@
 import React from 'react'
-import { Image, ImageBackground, Linking, Platform, StyleSheet, SafeAreaView, Text, TouchableOpacity, View, WebView } from 'react-native'
+import { Image, ImageBackground, Linking, Platform, StyleSheet, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
 import i18n from '../i18n'
 import AnimatedHeart from '../baseComponents/AnimatedHeart'
 import LoadigHeart from '../baseComponents/LoadingHeart'
-
+import { WebView } from 'react-native-webview'
 import backgroundWhite from '../assets/images/main/bg_white.jpg'
 import backgroundDark from '../assets/images/main/bg_dark.jpg'
 import backBtn from '../assets/images/icons/back_btn.png'

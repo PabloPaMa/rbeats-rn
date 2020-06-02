@@ -37,7 +37,8 @@ class LoginScreen extends React.Component {
     email: '',
     code: '',
     message: '',
-    validData: null
+    validData: null,
+    cancelled_message: 'auth_flow_cancelled',
   }
 
 
@@ -88,9 +89,14 @@ class LoginScreen extends React.Component {
               this.props.navigation.navigate('AppStack')
             }, 2000)
           })
-        } else {
+        } else if (res.status === 200) {
           await Storage.setItem('app_tempData', JSON.stringify({ email, code: res.message }))
           this.setState({ isCodeSent: true, message: 'code_sent', validData: { email, code: res.message }, })
+        } else if (res.status === 404) {
+          this.setState({ cancelled: true, cancelled_message: 'invalid_user', })
+        }
+        else {
+          this.setState({ cancelled: true })
         }
       })
       .catch(err => {
@@ -163,10 +169,12 @@ class LoginScreen extends React.Component {
   }
 
   render() {
-    const { message, isAuthFlow, isTesting, isInvalidCode, isCodeSent } = this.state
+    const { message, isAuthFlow, isTesting, cancelled_message, isInvalidCode, isCodeSent } = this.state
     const { navigate } = this.props.navigation
 
     if (isAuthFlow || isTesting) return <LoadingHeart text={i18n.t(message, appScope)} />
+
+    console.log(message)
 
     return <ImageBackground source={this.props.app.theme === 'light' ? backgroundWhite : backgroundDark} style={styles.container} resizeMode='cover' >
       <SafeAreaView style={{ flex: 1 }}>
@@ -194,7 +202,7 @@ class LoginScreen extends React.Component {
                   />
                   {
                     this.state.cancelled
-                      ? <Text style={[styles.text, { marginBottom: 15 }]}>{i18n.t('auth_flow_cancelled', loginScope)}</Text>
+                      ? <Text style={[styles.text, { marginBottom: 15 }]}>{i18n.t(cancelled_message, loginScope)}</Text>
                       : null
                   }
                   <TouchableOpacity onPress={this.onLogin} style={[styles.button, { backgroundColor: '#F4DC60', }]}>

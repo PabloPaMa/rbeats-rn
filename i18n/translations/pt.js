@@ -62,6 +62,7 @@ export default {
     "no_rb_email": "Esta aplicação é projetada para funcionários rb.",
     "passwords_does_not_match": "As senhas fornecidas não correspondem",
     "auth_flow_cancelled": "Ops, o login foi cancelado, tente novamente",
+    "invalid_user": "Ops, este e-mail não está registrado em nosso banco de dados.",
     "about": "Sobre RBeats",
     "about_RB": "Sobre RB",
     "about_title": "Português",
