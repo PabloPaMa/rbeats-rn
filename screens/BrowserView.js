@@ -1,7 +1,6 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, WebView } from 'react-native'
 import i18n from '../i18n'
-import { WebView } from 'react-native-webview'
 import Layout from '../baseComponents/Layout'
 import LoadingHeart from '../baseComponents/LoadingHeart'
 

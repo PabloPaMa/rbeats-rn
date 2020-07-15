@@ -88,10 +88,8 @@ class InitialScreen extends React.Component {
    */
   async componentDidMount() {
     if (!JailMonkey.isJailBroken()) {
-      console.log('D:', !JailMonkey.isJailBroken())
       this.loadAppData()
     } else {
-      console.log(':D', JailMonkey.isJailBroken())
       i18n.locale = getLanguage()
       this.setState({ isDeviceRooted: true })
     }

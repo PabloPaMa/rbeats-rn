@@ -122,6 +122,10 @@ class LoginScreen extends React.Component {
         let data = new FormData()
         data.append('email', this.state.validData.email)
         data.append('token', this.state.validData.code)
+
+        console.log('email', this.state.validData.email)
+        console.log('token', this.state.validData.code)
+
         fetch('https://rbeats.alucinastudio.com/userData', {
           method: 'POST',
           body: {
@@ -133,6 +137,7 @@ class LoginScreen extends React.Component {
         })
           .then(res => res.json())
           .then(async (res) => {
+            console.log(res)
             if (res.name) {
               await Storage.removeItem('app_tempData')
               await Storage.setItem('app_user', JSON.stringify({ email: res.email, username: res.name, countryCode: res.countryCode }))
@@ -145,7 +150,10 @@ class LoginScreen extends React.Component {
                 this.props.navigation.navigate('AppStack')
             }
           })
-          .catch(err => console.log(err))
+          .catch(err => {
+            this.setState({ cancelled: true })
+            console.log(err)
+          })
       }
       else this.setState({ isInvalidCode: true, message: 'invalid_authCode', code: '' })
     }
@@ -173,8 +181,6 @@ class LoginScreen extends React.Component {
     const { navigate } = this.props.navigation
 
     if (isAuthFlow || isTesting) return <LoadingHeart text={i18n.t(message, appScope)} />
-
-    console.log(message)
 
     return <ImageBackground source={this.props.app.theme === 'light' ? backgroundWhite : backgroundDark} style={styles.container} resizeMode='cover' >
       <SafeAreaView style={{ flex: 1 }}>
@@ -223,7 +229,7 @@ class LoginScreen extends React.Component {
                     keyboardType='email-address'
                     autoCapitalize='none'
                     value={this.state.code}
-                    onSelectionChange={() => { Clipboard.setString(''); console.log('selected', Clipboard.getString()); }}
+                    onSelectionChange={() => { Clipboard.setString(''); }}
                   />
                   <TouchableOpacity onPress={this.onSendEmail} style={[styles.button, { backgroundColor: '#F4DC60', }]}>
                     <Text style={[styles.text, { color: 'white' }]}>{i18n.t('resend', inputsScope)}</Text>

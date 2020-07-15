@@ -1,10 +1,9 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, WebView } from 'react-native'
 import Layout from '../../baseComponents/Layout'
 import LoadingHeart from '../../baseComponents/LoadingHeart'
 import i18n from '../../i18n'
 import { connect } from 'react-redux'
-import { WebView } from 'react-native-webview'
 
 const sectionScope = { scope: "sections" }
 

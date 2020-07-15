@@ -44,7 +44,7 @@ export const getLanguageByCountryCode = (countryCode = 'US') => {
     'th-TH', 'tk-TM', 'tr-TR', 'uk-UA', 'ur-PK', 'uz-Cyrl-UZ', 'uz-Latn-UZ', 'vi-VN', 'wo-SN', 'yo-NG', 'zh-CN', 'zh-HK',
     'zh-MO', 'zh-SG', 'zh-TW']
   let country = countries.filter(country => country.search(countryCode) !== -1)
-  return country.length !== 0 ? country[0].substring(0, 2) : 'en'
+  return country.length !== 0 ? country[0].substring(0, 2) : 'es'
 }
 
 i18n.fallbacks = true
